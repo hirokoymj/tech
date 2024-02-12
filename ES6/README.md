@@ -1,4 +1,4 @@
-# ES6 
+# ES6
 
 - [Const](1_Const/const.md)
 - [Let](2_Let/Let.md)
@@ -8,12 +8,3 @@
 - [Object Literal Shorthand](5_Object-Literal-Shorthand/object-literal-shorthand.md)
 - [Spread Operator](6_Spread-operator/spreadOperator.md)
 - [For of/For in](7_For-In-for-of/ForOf.md)
-
-
-# React
-- [Lifecycle method](11_LifecycleMethods/lifecycleMethod.md)
-
-# Typescript 
-- [ES6](#es6)
-- [React](#react)
-- [Typescript](#typescript)
