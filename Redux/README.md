@@ -10,7 +10,7 @@
 npm install @reduxjs/toolkit react-redux
 ```
 
-## configureStore
+## React Toolkit - configureStore
 
 > Redux Toolkit's configureStore method will automatically call combineReducers. So configureStore replaced with combineReducer().
 
