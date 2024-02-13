@@ -27,3 +27,7 @@
 | Copy       | Array.slice(start,end) | The original array does **NOT modified**.                                                                   |
 | Delete     | Array.splice(index, 1) | The original array **changes**!                                                                             |
 | Find       | Array.find()           | Find a value of the first match.                                                                            |
+
+# Quiz
+
+- [Quiz](./Quiz/README.md)
