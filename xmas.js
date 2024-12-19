@@ -154,4 +154,86 @@ guessForm.addEventListener('submit', (event) => {
 // Start the game
 displayFilm();
 
+/*------12-19-2024---*/
+import { films } from '/data.js'
+
+// Some useful elements
+const guessForm = document.getElementById('guess-form');
+const guessInput = document.getElementById('guess-input')
+const messageContainer = document.getElementsByClassName('message-container')[0]
+const emojiCluesContainer = document.getElementsByClassName('emoji-clues-container')[0]
+const submitButton = guessForm.querySelector('button');
+/*
+Randomly select a film from the films array.
+Display the film's emoji clues.
+Allow the user to input a guess.
+Validate the guess and provide feedback.
+Keep track of the number of guesses remaining.
+Handle game over and win conditions.
+Ensure no film is repeated.
+*/
+
+
+// Initialize game state
+let availableFilms = [...films];
+let currentFilm = null;
+let guessesRemaining = 3;
+let isGameOver = false;
+
+
+// Function to display a new film
+const displayNewFilm = () => {
+  currentFilm = getRandomFilm();
+  emojiCluesContainer.textContent = currentFilm.emoji;
+  guessInput.value = '';
+  guessesRemaining = 3;
+  messageContainer.textContent = '';
+  isGameOver = false;
+}
+
+
+function getRandomFilm() {
+  if (availableFilms.length === 0) return null; 
+  const randomIndex = Math.floor(Math.random() * availableFilms.length);
+  const film = availableFilms[randomIndex];
+  availableFilms.splice(randomIndex, 1);
+  return film;
+}
+
+const nextRound = () => {
+  if (availableFilms.length > 0) {
+    displayNewFilm();
+  } else {
+    messageContainer.textContent = "That's all folks!";
+    guessForm.disabled = true;
+    isGameOver = true;
+  }
+}
+
+
+
+// Function to handle guess submission
+guessForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  if (isGameOver) return;
+  
+  const guess = guessInput.value.trim();
+  if (guess === currentFilm.title) {
+    messageContainer.textContent = 'Correct!';
+    setTimeout(nextRound, 3000);
+  } else {
+    guessesRemaining--;
+    
+    if (guessesRemaining === 0) {
+      messageContainer.textContent = `Incorrect! The film was ${currentFilm.title}!`;
+      setTimeout(nextRound, 3000);
+    } else {
+      messageContainer.textContent = `Incorrect! You have ${guessesRemaining} more guesses remaining.`;
+    }
+  }
+});
+
+// Start the game
+displayNewFilm();
+
 
