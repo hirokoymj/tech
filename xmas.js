@@ -92,3 +92,66 @@ showEmoji();
 guessInput.addEventListener("submit", logSubmit);
 
 
+Randomly select a film from the films array.
+Display the film's emoji clues.
+Allow the user to input a guess.
+Validate the guess and provide feedback.
+Keep track of the number of guesses remaining.
+Handle game over and win conditions.
+Ensure no film is repeated.
+
+
+// ... (existing code)
+
+// Initialize game state
+let currentFilmIndex = 0;
+let guessesRemaining = 3;
+
+// Function to display a new film
+function displayFilm() {
+  const currentFilm = films[currentFilmIndex];
+  emojiCluesContainer.textContent = currentFilm.emoji;
+  guessInput.value = '';
+  guessesRemaining = 3;
+  messageContainer.textContent = '';
+}
+
+// Function to handle guess submission
+guessForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const guess = guessInput.value.trim();
+
+  if (guess === currentFilm.title) {
+    messageContainer.textContent = 'Correct!';
+    currentFilmIndex++;
+    setTimeout(() => {
+      if (currentFilmIndex < films.length) {
+        displayFilm();
+      } else {
+        messageContainer.textContent = "That's all folks!";
+        guessForm.disabled = true;
+      }
+    }, 3000);
+  } else {
+    guessesRemaining--;
+    if (guessesRemaining === 0) {
+      messageContainer.textContent = `Incorrect! The film was ${currentFilm.title}!`;
+      currentFilmIndex++;
+      setTimeout(() => {
+        if (currentFilmIndex < films.length) {
+          displayFilm();
+        } else {
+          messageContainer.textContent = "That's all folks!";
+          guessForm.disabled = true;
+        }
+      }, 3000);
+    } else {
+      messageContainer.textContent = `Incorrect! You have ${guessesRemaining} more guesses remaining.`;
+    }
+  }
+});
+
+// Start the game
+displayFilm();
+
+
